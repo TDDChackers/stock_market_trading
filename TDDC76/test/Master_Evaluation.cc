@@ -6,11 +6,27 @@
  */
 #include "Master_Evaluation.h"
 #include "Evaluation.h"
+#include "Decision.h"
 #include <string>
 #include <vector>
 #include <iostream>
 using namespace std;
 
+Master_Evaluation::~Master_Evaluation()
+{
+	//Deletes Evaluation objects
+	for(int i = 0; i + evaluations.begin() != evaluations.end(); i++)
+		{
+			delete evaluations.at(i);
+			evaluations.at(i) = nullptr;
+		}
+	//Deletes Decision objects
+	for(int i = 0; i + decisions.begin() != decisions.end(); i++)
+		{
+			delete decisions.at(i);
+			decisions.at(i) = nullptr;
+		}
+}
 
 void Master_Evaluation::initialize(Database* database_input, Trader* trader_input)
   {
@@ -33,13 +49,12 @@ void Master_Evaluation::set_parameters(vector<string>& stock_input,
 	confidence = confidence_input;
 
 	//Cleans previous Evaluation tree.
-	/*for(vector<Evaluation*>::iterator i = evaluations.begin(); i != evaluations.end(); i++)
+	for(int i = 0; i + evaluations.begin() != evaluations.end(); i++)
 	{
 		delete evaluations.at(i);
 		evaluations.at(i) = nullptr;
 	}
 	evaluations.clear();
-*/
 	//Creates new Evaluation tree.
 	//int i = 0;
 	for (int i = 0; i + stock_input.begin() != stock_input.end(); i++)
@@ -51,11 +66,35 @@ void Master_Evaluation::set_parameters(vector<string>& stock_input,
 	}
 }
 
-void Master_Evaluation::make_decision()
+vector<Decision*> Master_Evaluation::make_decision()
 {
 	for(int i = 0; i + evaluations.begin() != evaluations.end(); i++)
 	{
-		evaluations[i]->make_decision();
+		Decision* temp = evaluations[i]->make_decision();
+		decisions.push_back(temp);
+	}
+	return decisions;
+}
+
+//Dummy-funktion för testning
+void Master_Evaluation::show_decisions()
+{
+	for(int i= 0; decisions.begin() + i != decisions.end(); i++)
+	{
+		cout << "Beslut " << stocks[i] << " handlades för " << decisions.at(i)->get_price() << endl;
 	}
 }
+
+vector<vector<int>> Master_Evaluation::get_model_data()
+{
+	vector<vector<int>> data_vector;
+	for(int i = 0; i + evaluations.begin() != evaluations.end(); i++)
+		{
+			data_vector.push_back(evaluations.at(i)->get_model_data());
+		}
+	return data_vector;
+}
+
+
+
 

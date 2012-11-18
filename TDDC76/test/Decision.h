@@ -13,7 +13,7 @@
 class Decision
 {
 public:
-	Decision(string)
+	Decision(std::string, double, int);
 	std::string get_stock();
 	double get_price();
 	int get_volume();

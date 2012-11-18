@@ -12,7 +12,7 @@
 //#include "Portfolio.h"
 #include "Database.h"
 #include "Trader.h"
-//#include "Decision.h"
+#include "Decision.h"
 #include <string>
 #include <vector>
 
@@ -21,8 +21,9 @@ class Evaluation
 public:
 	Evaluation(std::string, std::vector<std::string>, int, int, std::string, double,
 			Database*, Trader*);
-	void make_decision();
-	int get_model_data();
+	~Evaluation();
+	Decision* make_decision();
+	std::vector<int> get_model_data();
 
 private:
 std::vector<Model*> models;
@@ -34,6 +35,7 @@ std::string frequency;
 double confidence;
 Database* database;
 Trader* trader;
+Decision* decision;
 //Portfolio* portfolio;
 
 };

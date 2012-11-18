@@ -10,7 +10,7 @@
 
 #include "Database.h"
 #include "Trader.h"
-//#include "Decision.h"
+#include "Decision.h"
 #include "Evaluation.h"
 //#include "Portfolio.h"
 #include <vector>
@@ -19,17 +19,19 @@
 class Master_Evaluation
 {
 public:
-
+	~Master_Evaluation();
 	void initialize(Database*, Trader*);
-	void make_decision();
+	std::vector<Decision*> make_decision();
 	void set_parameters(std::vector<std::string>&, std::vector<std::string>&,
 						int interval_start, int interval_end,
 						std::string frequency, double confidence);
 
-	int get_model_data();
+	void show_decisions();
+	std::vector<std::vector<int>> get_model_data();
 
 private:
 	std::vector<Evaluation*> evaluations;
+	std::vector<Decision*> decisions;
 	Database* database;
 	Trader* trader;
 	//Portfolio* portfolio;

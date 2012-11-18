@@ -10,6 +10,9 @@
 
 using namespace std;
 
+Decision::Decision(string stock_input, double price_input, int volume_input)
+: stock(stock_input), price(price_input), volume(volume_input), pending_order(true) {}
+
 string Decision::get_stock()
 {
 	return stock;
