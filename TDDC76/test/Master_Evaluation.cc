@@ -12,6 +12,11 @@
 #include <iostream>
 using namespace std;
 
+Master_Evaluation::Master_Evaluation()
+{
+	cout << "Master_Evaluation created.\n";
+}
+
 Master_Evaluation::~Master_Evaluation()
 {
 	//Deletes Evaluation objects
@@ -26,6 +31,7 @@ Master_Evaluation::~Master_Evaluation()
 			delete decisions.at(i);
 			decisions.at(i) = nullptr;
 		}
+	cout << "Master_Evaluation deleted.\n"
 }
 
 void Master_Evaluation::initialize(Database* database_input, Trader* trader_input)

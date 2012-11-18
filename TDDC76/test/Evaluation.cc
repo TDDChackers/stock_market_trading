@@ -20,6 +20,7 @@ Evaluation::Evaluation(string stock_input, vector<string> models_input,
   confidence(confidence_input), database(database_input), trader(trader_input),
   decision(nullptr)
 {
+	cout << stock << " has been created.\n"
 	for(int i = 0; i + models_input.begin() != models_input.end(); i++)
 	{
 		if(models_input[i] == "MACD")
@@ -46,6 +47,7 @@ Evaluation::~Evaluation()
 		models.at(i) = nullptr;
 	}
 	delete decision;
+	cout << stock << " has been deleted.\n"
 }
 
 
