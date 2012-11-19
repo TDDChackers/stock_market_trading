@@ -12,7 +12,6 @@
 #include <string>
 #include <unistd.h>
 #include <sstream>
-#include <tuple>
 #include <cstdlib>
 #include <time.h>
 #include <stdio.h>
@@ -22,27 +21,28 @@
 using namespace std;
 int main()
 {
+    bool DEBUG_ = false;
     Database* _Database = new Database();
     std::string path, timestamp, stock_id;
     
-    cout << "DEBUG = " << DEBUG << endl;
+    cout << "DEBUG_ = " << DEBUG_ << endl;
     
     cout << "Input path to database." << endl;
-    if (! DEBUG)
+    if (! DEBUG_)
     {
         cin >> path;
     }
     else
     {
-        #warning ändra sökvägen till aktiens "PATH". 
+        #warning ändra sökvägen till aktiens "PATH" om du använder DEBUG_. 
         path = "/Users/victorbirath/Dropbox/Victor_och_Victor/TDDC76/Projekt/TestProgram/database/database/aktie.txt";
         cout << path << endl;
     }
     
-    _Database->inport_file(path);
+    _Database->import_file(path);
     
     cout << "Input stock_id: ";
-    if (! DEBUG)
+    if (! DEBUG_)
     {
     cin >> stock_id;
     }
@@ -54,7 +54,7 @@ int main()
     
     cout << "Input timestamp: ";
     time_t tTimestamp;
-    if (! DEBUG)
+    if (! DEBUG_)
     {
         cin >> timestamp;
     }
@@ -67,7 +67,9 @@ int main()
     
     tTimestamp = Stock::time_parser(timestamp);
     std::vector<double> data = _Database->get(stock_id, tTimestamp);
-    cout << data[OPEN] <<" ," << data[CLOSE] <<" ," <<data[HIGH] <<" ,"<<data[LOW] <<endl;
+    
+    
+    cout << data[OPEN] <<" ," << data[CLOSE] <<" ," <<data[HIGH] <<" ,"<<data[LOW] <<endl; //OSV..
 }
 
 

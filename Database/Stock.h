@@ -22,17 +22,17 @@ enum stock_data_index
     LOW = 3,
     CLOSE= 4,
     VOLUME=5,
-    ADJ_CLOSE = 6,
+    ADJ_CLOSE = 6
 };
 
 class Stock {
     
     
 public:
-    Stock() = delete;
-    Stock(const std::string& name,const std::string& path = 0);
+//    Stock() = delete;
+    Stock(const std::string& name,const std::string& path = "");
     void insert(const std::string data);
-    void inport_database(const std::string path);
+    void import_database(const std::string path);
     std::vector<double> get_data(const time_t timestamp);
     static time_t time_parser(const std::string time_string,int hour = 0,int min = 0);
     static std::vector<double> data_parser(const std::string data);
@@ -40,7 +40,7 @@ public:
 private:
     std::string _name;
     std::string _path;
-    std::map<time_t, std::vector<double>> _history;
+    std::map<time_t, std::vector<double> > _history;
     
     
     

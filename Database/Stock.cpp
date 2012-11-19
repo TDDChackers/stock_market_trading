@@ -11,6 +11,7 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <cstdlib>
 #include "Stock_Error.h"
 
 using namespace std;
@@ -19,7 +20,7 @@ Stock::Stock(const string& name,const string& path)
 {
     if (! _path.empty())
     {
-        inport_database(_path);
+        import_database(_path);
     }
     
 }
@@ -37,9 +38,9 @@ void Stock::insert(string data)
     else _history[id] = data_parser(stock_data);
 }
 
-void Stock::inport_database(const std::string path)
+void Stock::import_database(const std::string path)
 {
-    ifstream ifs(path);
+    ifstream ifs(path.c_str());
     if (!ifs.good())
     {
         throw Stock_Error("Can not read " + path + " to " + _name);
@@ -68,10 +69,10 @@ vector<double> Stock::data_parser(const string sData)
 {
     stringstream ss(sData);
     vector<double> data(ADJ_CLOSE + 1,-1);
-    for (stock_data_index i = OPEN; i <= ADJ_CLOSE; i++)
+    for (int i = OPEN; i <= ADJ_CLOSE; i++)
     {   string value;
         getline(ss,value,',');
-        double dValue =  stod(value);
+        double dValue =  atof(value.c_str());
         data[i] =dValue;
     }
     return data;
@@ -94,7 +95,8 @@ time_t Stock::time_parser(const std::string time_string,int hour,int min)
     
     time ( &rawtime );
     timeinfo = localtime ( &rawtime );
-    int year = stoi(y);
+    int year = atoi(y.c_str()); // fullösning, akta https://www.msb.se/RibData/Filer/pdf/20259.pdf
+
     if (year > 1900)
         year -=1900;
     if (0 <= year <50) {
@@ -102,8 +104,8 @@ time_t Stock::time_parser(const std::string time_string,int hour,int min)
     }
     
     timeinfo->tm_year = year;
-    timeinfo->tm_mon = stoi(m)-1;
-    timeinfo->tm_mday = stoi(d);
+    timeinfo->tm_mon = atoi(m.c_str())-1; // fullösning, akta https://www.msb.se/RibData/Filer/pdf/20259.pdf
+    timeinfo->tm_mday = atoi(d.c_str());
     timeinfo->tm_hour = hour;
     timeinfo->tm_min  = min;
     timeinfo->tm_sec  = 0;

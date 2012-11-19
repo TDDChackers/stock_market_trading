@@ -30,10 +30,10 @@ void Database::update(std::string id,std::string data)
     (*it).second->insert(data);
         
 }
-void Database::inport_file(std::string path)
+void Database::import_file(std::string path)
 {
     //läs sidhuvud.
-    ifstream ifs(path);
+    ifstream ifs(path.c_str());
     
     if(! ifs.good())
     {
@@ -59,7 +59,7 @@ void Database::inport_file(std::string path)
         }
     }
 }
-void inport_web(const std::string stock_id,const time_t from,const time_t to,const float freq)
+void import_web(const std::string stock_id,const time_t from,const time_t to,const float freq)
 {
     //Vänta med denna.
 }
