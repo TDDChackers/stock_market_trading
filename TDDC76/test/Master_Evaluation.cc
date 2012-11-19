@@ -12,10 +12,6 @@
 #include <iostream>
 using namespace std;
 
-Master_Evaluation::Master_Evaluation()
-{
-	cout << "Master_Evaluation created.\n";
-}
 
 Master_Evaluation::~Master_Evaluation()
 {
@@ -31,7 +27,7 @@ Master_Evaluation::~Master_Evaluation()
 			delete decisions.at(i);
 			decisions.at(i) = nullptr;
 		}
-	cout << "Master_Evaluation deleted.\n"
+	cout << "Master_Evaluation deleted.\n";
 }
 
 void Master_Evaluation::initialize(Database* database_input, Trader* trader_input)
@@ -43,7 +39,7 @@ void Master_Evaluation::initialize(Database* database_input, Trader* trader_inpu
 
 void Master_Evaluation::set_parameters(vector<string>& stock_input,
 										vector<string>& models_input,
-										int interval_start_input, int interval_end_input,
+										time_t interval_start_input, time_t interval_end_input,
 										string frequency_input, double confidence_input)
 
 {
@@ -91,9 +87,9 @@ void Master_Evaluation::show_decisions()
 	}
 }
 
-vector<vector<int>> Master_Evaluation::get_model_data()
+vector<vector<double>> Master_Evaluation::get_model_data()
 {
-	vector<vector<int>> data_vector;
+	vector<vector<double>> data_vector;
 	for(int i = 0; i + evaluations.begin() != evaluations.end(); i++)
 		{
 			data_vector.push_back(evaluations.at(i)->get_model_data());

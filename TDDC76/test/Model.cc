@@ -12,20 +12,26 @@
 
 using namespace std;
 
-int Model::get_model_data()
+double Model::get_model_data()
 {
 	return evaluate();
 }
 
-Model::Model(string stock_input, string model_input, int interval_start_input,
-		int interval_end_input, string frequency_input, Database* database_input)
+Model::Model(string stock_input, string model_input, time_t interval_start_input,
+		time_t interval_end_input, string frequency_input, Database* database_input)
 : stock(stock_input), model(model_input), interval_start(interval_start_input),
-  interval_end(interval_end_input), frequency(frequency_input), database(database_input) {}
+  interval_end(interval_end_input), frequency(frequency_input), database(database_input)
+{
+	cout << "Model parameters has been set.\n";
+}
 
-Williamson::Williamson(string stock_input, string model_input, int interval_start_input,
-		int interval_end_input, string frequency_input, Database* database_input)
+Williamson::Williamson(string stock_input, string model_input, time_t interval_start_input,
+		time_t interval_end_input, string frequency_input, Database* database_input)
 : Model(stock_input, model_input,interval_start_input, interval_end_input,
-		frequency_input,database_input) {}
+		frequency_input,database_input)
+{
+	cout << model_input << " has been created.\n";
+}
 
 
 // Skall returnera -1,0,1
@@ -35,16 +41,21 @@ int Williamson::make_decision()
 }
 
 
-int Williamson:: evaluate()
+double Williamson::evaluate()
 {
-	return 3;
+	vector<double> stock_data;
+	stock_data = database->get(stock,interval_end);
+	return stock_data[CLOSE];
 }
 
 //------------------------------------------------------------------------------------------------
-MACD::MACD(string stock_input, string model_input, int interval_start_input,
-		int interval_end_input, string frequency_input, Database* database_input)
+MACD::MACD(string stock_input, string model_input, time_t interval_start_input,
+		time_t interval_end_input, string frequency_input, Database* database_input)
 : Model(stock_input, model_input,interval_start_input, interval_end_input,
-		frequency_input,database_input) {}
+		frequency_input,database_input)
+{
+	cout << model_input << " has been created.\n";
+}
 
 
 // Skall returnera -1,0,1
@@ -53,7 +64,9 @@ int MACD::make_decision()
 	return 2;
 }
 
-int MACD:: evaluate()
+double MACD::evaluate()
 {
-	return 4;
+	vector<double> stock_data;
+	stock_data = database->get(stock,interval_end);
+	return stock_data[OPEN];
 }

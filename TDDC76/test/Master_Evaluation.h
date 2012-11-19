@@ -23,11 +23,11 @@ public:
 	void initialize(Database*, Trader*);
 	std::vector<Decision*> make_decision();
 	void set_parameters(std::vector<std::string>&, std::vector<std::string>&,
-						int interval_start, int interval_end,
+						time_t, time_t,
 						std::string frequency, double confidence);
 
 	void show_decisions();
-	std::vector<std::vector<int>> get_model_data();
+	std::vector<std::vector<double>> get_model_data();
 
 private:
 	std::vector<Evaluation*> evaluations;
@@ -37,8 +37,8 @@ private:
 	//Portfolio* portfolio;
 	std::vector<std::string> stocks;
 	std::vector<std::string> models;
-	int interval_start;
-	int interval_end;
+	time_t interval_start;
+	time_t interval_end;
 	std::string frequency;
 	int confidence;
 };

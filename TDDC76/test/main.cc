@@ -17,15 +17,16 @@ int main ()
 {
 	Master_Evaluation test;
 	Database* database_ptr = new Database;
+	database_ptr->import_file("aktie.txt");
 	Trader* trader_ptr = new Trader;
 	vector<string> stock;
-	stock.push_back("Ericsson");
-	stock.push_back("SEB");
+	stock.push_back("Eric.b-st");
+	//stock.push_back("Eric.b-st");
 	vector<string> model;
 	model.push_back("MACD");
 	model.push_back("Williamson");
-	int interval_start = 1;
-	int interval_end = 2;
+	time_t interval_start = 1;
+	time_t interval_end = 4502905200;
 	string frequency = "Minute";
 	double confidence = 0.8;
 
@@ -34,7 +35,7 @@ int main ()
 	test.set_parameters(stock, model, interval_start, interval_end, frequency, confidence);
 	test.make_decision();
 	test.show_decisions();
-	vector<vector<int> > apa = test.get_model_data();
+	vector<vector<double> > apa = test.get_model_data();
 
 	for(int i = 0; i + apa.begin() != apa.end(); i++)
 	{

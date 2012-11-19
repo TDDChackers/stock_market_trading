@@ -12,7 +12,7 @@
 using namespace std;
 
 Evaluation::Evaluation(string stock_input, vector<string> models_input,
-						int interval_start_input, int interval_end_input,
+		time_t interval_start_input, time_t interval_end_input,
 						string frequency_input, double confidence_input,
 						Database* database_input, Trader* trader_input)
 : stock(stock_input), model_names(models_input), interval_start(interval_start_input),
@@ -20,7 +20,7 @@ Evaluation::Evaluation(string stock_input, vector<string> models_input,
   confidence(confidence_input), database(database_input), trader(trader_input),
   decision(nullptr)
 {
-	cout << stock << " has been created.\n"
+	cout << stock << " has been created.\n";
 	for(int i = 0; i + models_input.begin() != models_input.end(); i++)
 	{
 		if(models_input[i] == "MACD")
@@ -47,7 +47,7 @@ Evaluation::~Evaluation()
 		models.at(i) = nullptr;
 	}
 	delete decision;
-	cout << stock << " has been deleted.\n"
+	cout << stock << " has been deleted.\n";
 }
 
 
@@ -62,9 +62,9 @@ Decision* Evaluation::make_decision()
 	return decision;
 }
 
-vector<int> Evaluation::get_model_data()
+vector<double> Evaluation::get_model_data()
 {
-	vector<int> data_vector;
+	vector<double> data_vector;
 	for(int i = 0; i + models.begin() != models.end(); i++)
 	{
 		data_vector.push_back(models.at(i)->get_model_data());

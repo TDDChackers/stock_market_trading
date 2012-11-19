@@ -19,18 +19,18 @@
 class Evaluation
 {
 public:
-	Evaluation(std::string, std::vector<std::string>, int, int, std::string, double,
+	Evaluation(std::string, std::vector<std::string>, time_t, time_t, std::string, double,
 			Database*, Trader*);
 	~Evaluation();
 	Decision* make_decision();
-	std::vector<int> get_model_data();
+	std::vector<double> get_model_data();
 
 private:
 std::vector<Model*> models;
 std::string stock;
 std::vector<std::string> model_names;
-int interval_start;
-int interval_end;
+time_t interval_start;
+time_t interval_end;
 std::string frequency;
 double confidence;
 Database* database;
