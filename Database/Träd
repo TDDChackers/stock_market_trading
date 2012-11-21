@@ -1,0 +1,10 @@
+Nodbalansering
+för alla noder: antalet noder i subträden får skilja högst 1.
+
+Höjdbalanserade Binärt sökträd.
+AVL-träd Logaritmiskt.
+För alla noder:
+        (k)
+               (>k)
+     (<k)    (∂h≤1)
+    

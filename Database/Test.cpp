@@ -66,6 +66,7 @@ int main()
     
     
     tTimestamp = Stock::time_parser(timestamp);
+    cout << " Is_timestamp:  " << _Database->is_timestamp(stock_id,tTimestamp)<<endl;
     std::vector<double> data = _Database->get(stock_id, tTimestamp);
     
     

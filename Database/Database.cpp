@@ -70,6 +70,15 @@ bool Database::is_id(string id)
     return c;
 }
 
+bool Database::is_timestamp(std::string stock_,time_t t_)
+{
+    if (is_id(stock_))
+    {
+        return (bool)_Stocks[stock_]->is_exists(t_);
+    }
+    return false;
+}
+
 std::vector<double> Database::get(std::string id, time_t timestamp)
 {
     return _Stocks[id]->get_data(timestamp);

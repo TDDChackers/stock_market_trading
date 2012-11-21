@@ -36,6 +36,7 @@ public:
     std::vector<double> get_data(const time_t timestamp);
     static time_t time_parser(const std::string time_string,int hour = 0,int min = 0);
     static std::vector<double> data_parser(const std::string data);
+    bool is_exists(time_t);
     
 private:
     std::string _name;

@@ -26,6 +26,8 @@
         void import_file(std::string path);
         void import_web(const std::string stock_id,const time_t from,const time_t to,const float freq);
         bool is_id(std::string id);
+        bool is_timestamp(std::string stock_,time_t t_);
+
         std::vector<double> get(std::string id, time_t timestamp);
         
     private:

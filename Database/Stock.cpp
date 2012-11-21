@@ -59,11 +59,23 @@ void Stock::import_database(const std::string path)
     ifs.close();
     cout << "Map size is: " << _history.size() << endl;
 }
+
+bool Stock::is_exists(time_t t_)
+{
+    return (bool)_history.count(t_);
+}
+
 std::vector<double> Stock::get_data(const time_t timestamp)
 {
     unsigned long x = _history.count(timestamp);
-    cout << "Timestamp: " << timestamp << ". Exists? = " << x <<  endl;
-    return _history[timestamp];
+    if (x) {
+        return _history[timestamp];
+    }
+    else
+    {
+        throw logic_error("Efterfrågad aktie finns inte i databasen");
+    }
+    
 }
 vector<double> Stock::data_parser(const string sData)
 {
