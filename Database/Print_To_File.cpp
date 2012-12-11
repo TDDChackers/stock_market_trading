@@ -12,37 +12,45 @@
 #include <sys/types.h>
 #include <fstream>
 #include <vector>
+#include <stdexcept>
+#include "Time_Parser.h"
+#include <iomanip>
 
-void Print_To_File(std::ofstream& ofs, std::vector<double> data)
+using namespace Time_Parser;
+void Print_To_File(std::ofstream& file,unsigned long timestamp, std::vector<double> data)
 {
-    
     unsigned int i;
-    if (ofs.good())
-    {
-        for (i = 0;  i < data.size(); i++)
-        {
-            ofs << data[i] << ",";
-        }
-        ofs << data[i]<<std::endl;
-    }else std::cout << "Filen fakkar!" <<std::endl;
 
+    if (file.is_open())
+    {
+        //file.seekp(std::ios_base::end);
+        file << year(timestamp) << "-" << month(timestamp)<< "-" << date(timestamp);
+        file << std::setprecision(10);
+        for (i = 1;  i < data.size(); i++)
+        {
+            file << "," << data[i];
+        }
+        file <<'\n';
+    }
+    else throw std::runtime_error("Can not print data");
+    
 }
 
-std::ofstream make_file(std::string path, std::string stock_id)
+std::string make_file(std::string path, std::string stock_id)
 {
     path +="/Database";
     if ( mkdir((path).c_str(),0777) != 0)
     {
-        std::cout<<"Mappen finns redan" << std::endl;
+        throw std::runtime_error("Can not make file: " + path);
     }
-    
-    std::ofstream ofs(path+"/"+stock_id+".txt");
+    std::string filename = path+"/"+stock_id+".txt";
+    std::ofstream ofs(filename.c_str());
     if (ofs)
     {
-        ofs << stock_id << std::endl;
         ofs << "Date,Open,High,Low,Close,Volume,Adj Close" << std::endl;
-        return ofs;
-
+        return (filename);
+        
     }
-    
+    else
+        throw std::runtime_error("Can not use file: " + path);
 }

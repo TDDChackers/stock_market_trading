@@ -20,9 +20,13 @@ namespace Time_Parser
     std::string year(time_t timestamp);
     std::string month(time_t timestamp);
     std::string date(time_t timestamp);
+    int int_year(time_t timestamp);
+    int int_month(time_t timestamp);
+    int int_date(time_t timestamp);
     void increase_day(time_t& t);
 }
     std::string to_string(int);
+    int to_int(std::string);
 
 
 

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 
-void Print_To_File(std::ofstream& ofs, std::vector<double>);
-std::ofstream make_file(std::string path, std::string stock_id);
+void Print_To_File(std::ofstream& file,unsigned long, std::vector<double>);
+std::string make_file(std::string path, std::string stock_id);
 
 #endif /* defined(__Database_ver2__Print_To_File__) */

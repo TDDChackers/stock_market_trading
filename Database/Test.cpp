@@ -38,7 +38,7 @@ int main()
     }
     else
     {
-        #warning ändra sökvägen till aktiens "PATH" om du använder DEBUG_. 
+        //#warning ändra sökvägen till aktiens "PATH" om du använder DEBUG_.
         path = "/Users/victorbirath/Desktop/stock_market_trading-master/Database/aktie.txt";
         cout << path << endl;
     }
