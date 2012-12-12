@@ -9,7 +9,6 @@
 #ifndef __JSON__JSON_parser__
 #define __JSON__JSON_parser__
 
-#include <iostream>
 #include <string>
 
 #Warning Edit var_name1 & var_name2 to const std::string!
