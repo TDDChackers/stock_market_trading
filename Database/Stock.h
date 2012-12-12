@@ -35,6 +35,7 @@ class Stock {
 public:
     ~Stock();
     Stock() = delete;
+    Stock(Stock&) = delete;
     Stock(const std::string& name,const std::string& path = "");
     void    insert(const std::string& data);
     void    import_database(const std::string& path);
@@ -52,7 +53,7 @@ private:
     std::string     _path;
     double          _latest_close_price = -1;
     time_t          _timestamp_latest_close_price = -1;
-    time_t          _timestamp_oldest_close_price = 10000000000000000;
+    time_t          _timestamp_oldest_close_price = 100000000000000;
     
     std::map<time_t, std::vector<double> >* _history;
     

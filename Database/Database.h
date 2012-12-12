@@ -30,11 +30,11 @@ public:
     void import_web(std::string& stock_id,time_t& from,time_t& to);
     bool is_id(const std::string& id);
     
-    bool is_timestamp(const std::string& stock_id, time_t& t_);
+    bool is_timestamp(const std::string& stock_id, const time_t& t_);
     double get_latest_close_price(const std::string& stock_id);
     std::string* get_potential_ids();
     std::vector<std::string> get_ids();
-    std::vector<double> get(std::string& id, time_t& timestamp);
+    std::vector<double> get(std::string& id, const time_t& timestamp);
     
 private:
     std::map<std::string, Stock*> _Stocks;

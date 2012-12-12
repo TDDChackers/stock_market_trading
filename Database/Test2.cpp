@@ -19,10 +19,10 @@ int main()
 {
     Database* _Database = new Database();
     
-    time_t from = Time_Parser::time_parser("2010-10-14");
+    time_t from = Time_Parser::time_parser("2012-10-14");
     
     time_t from_later = Time_Parser::time_parser("2000-09-10");
-    time_t to = Time_Parser::time_parser("2012-10-10");
+    time_t to = Time_Parser::time_parser("2012-10-20");
     
     
     std::string _id = "GOOG";
@@ -36,7 +36,8 @@ int main()
     {
         std::cout << err.what() << std::endl;
     }
-        std::cout << "test: " << _Database->get(_id, to)[OPEN] << std::endl;
+    time_t test_time = Time_Parser::time_parser("2012-09-20");
+        std::cout << "test: " << _Database->get(_id, test_time)[OPEN] << std::endl;
 
    
     

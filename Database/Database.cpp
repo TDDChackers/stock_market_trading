@@ -124,7 +124,7 @@ bool Database::is_id(const string& id)
     return c;
 }
 
-bool Database::is_timestamp(const std::string& stock,time_t& t)
+bool Database::is_timestamp(const std::string& stock,const time_t& t)
 {
     if (is_id(stock))
     {
@@ -133,7 +133,7 @@ bool Database::is_timestamp(const std::string& stock,time_t& t)
     return false;
 }
 
-std::vector<double> Database::get(std::string& id, time_t& timestamp)
+std::vector<double> Database::get(std::string& id,const time_t& timestamp)
 {
     return _Stocks[id]->get_data(timestamp);
 }

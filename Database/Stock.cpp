@@ -150,13 +150,13 @@ double Stock::get_latest_close_price() const
 void Stock::correct_timestamps(time_t& from, time_t& to)
 {
      std::cout << " Stock::correct_timestamps" << std::endl;
-    if (_timestamp_oldest_close_price < from < _timestamp_latest_close_price)
+    if (_timestamp_oldest_close_price < from && from < _timestamp_latest_close_price)
     {
         std::cout << " _timestamp_oldest_close_price < from < _timestamp_latest_close_price" << std::endl;
         from = _timestamp_latest_close_price;
         
     }
-    if (_timestamp_oldest_close_price < to < _timestamp_latest_close_price)
+    if (_timestamp_oldest_close_price < to && to < _timestamp_latest_close_price)
     {
          std::cout << " _timestamp_oldest_close_price < to < _timestamp_latest_close_price" << std::endl;
         to = _timestamp_oldest_close_price;
