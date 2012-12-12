@@ -26,8 +26,8 @@ Database::~Database()
         delete (*it).second;
     }
 }
-
-void Database::update(std::string& id,std::string& data) // id och data borde inte ändras i denna funktion, const?
+# id och data borde inte ändras i denna funktion, const?;
+void Database::update(std::string& id,std::string& data) 
 {
     //Kolla om aktien finns
     std::map<std::string, Stock*>::iterator it;
@@ -94,17 +94,17 @@ bool Database::is_id(const string& id)
     bool c = (bool)_Stocks.count(id);
     return c;
 }
-
+# is_exist använder const timestamp så t ovan kan vara const;
 bool Database::is_timestamp(const std::string& stock,time_t& t)
 {
     if (is_id(stock))
     {
-        return (bool)_Stocks[stock]->is_exists(t); // is_exist använder const timestamp så t ovan kan vara const
+        return (bool)_Stocks[stock]->is_exists(t); 
     }
     return false;
 }
-
-std::vector<double> Database::get(std::string& id, time_t& timestamp) // timestamp kan vara const då get_data tar en const timestamp
+# timestamp kan vara const då get_data tar en const timestamp;
+std::vector<double> Database::get(std::string& id, time_t& timestamp) 
 {
     return _Stocks[id]->get_data(timestamp);
 }
