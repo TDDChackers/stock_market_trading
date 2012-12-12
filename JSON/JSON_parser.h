@@ -12,5 +12,6 @@
 #include <iostream>
 #include <string>
 
+#Warning Edit var_name1 & var_name2 to const std::string!
 void JSON_Parser(std::string&,std::string&,std::string&,std::string = "");
 #endif /* defined(__JSON__JSON_parser__) */
