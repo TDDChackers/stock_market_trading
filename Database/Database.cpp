@@ -27,7 +27,7 @@ Database::~Database()
     }
 }
 
-void Database::update(std::string& id,std::string& data)
+void Database::update(std::string& id,std::string& data) // id och data borde inte ändras i denna funktion, const?
 {
     //Kolla om aktien finns
     std::map<std::string, Stock*>::iterator it;
@@ -99,7 +99,7 @@ bool Database::is_timestamp(const std::string& stock,time_t& t)
 {
     if (is_id(stock))
     {
-        return (bool)_Stocks[stock]->is_exists(t);
+        return (bool)_Stocks[stock]->is_exists(t); // is_exist använder const timestamp så t ovan kan vara const
     }
     return false;
 }
