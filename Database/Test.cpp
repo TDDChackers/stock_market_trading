@@ -12,37 +12,41 @@
 #include <string>
 #include <unistd.h>
 #include <sstream>
-#include <tuple>
 #include <cstdlib>
 #include <time.h>
 #include <stdio.h>
 #include <ctime>
 #include "Database.h"
+#include "Time_Parser.h"
+//#include "Print_To_File.h"
+
 
 using namespace std;
+using namespace Time_Parser;
 int main()
 {
+    bool DEBUG_ = true;
     Database* _Database = new Database();
     std::string path, timestamp, stock_id;
     
-    cout << "DEBUG = " << DEBUG << endl;
+    cout << "DEBUG_ = " << DEBUG_ << endl;
     
     cout << "Input path to database." << endl;
-    if (! DEBUG)
+    if (! DEBUG_)
     {
         cin >> path;
     }
     else
     {
-        #warning ändra sökvägen till aktiens "PATH". 
-        path = "/Users/victorbirath/Dropbox/Victor_och_Victor/TDDC76/Projekt/TestProgram/database/database/aktie.txt";
+        //#warning ändra sökvägen till aktiens "PATH" om du använder DEBUG_.
+        path = "/Users/victorbirath/Desktop/stock_market_trading-master/Database/aktie.txt";
         cout << path << endl;
     }
     
-    _Database->inport_file(path);
+    _Database->import_file(path);
     
     cout << "Input stock_id: ";
-    if (! DEBUG)
+    if (! DEBUG_)
     {
     cin >> stock_id;
     }
@@ -54,7 +58,7 @@ int main()
     
     cout << "Input timestamp: ";
     time_t tTimestamp;
-    if (! DEBUG)
+    if (! DEBUG_)
     {
         cin >> timestamp;
     }
@@ -65,9 +69,22 @@ int main()
     }
     
     
-    tTimestamp = Stock::time_parser(timestamp);
+    tTimestamp = Time_Parser::time_parser(timestamp);
+    cout << " Is_timestamp:  " << _Database->is_timestamp(stock_id,tTimestamp)<<endl;
+    std::cout << Time_Parser::date(tTimestamp)<< endl;
+    std::cout << "add a day" << endl;
+    increase_day(tTimestamp);
+    std::cout << Time_Parser::date(tTimestamp)<< endl;
     std::vector<double> data = _Database->get(stock_id, tTimestamp);
+    
+    
     cout << data[OPEN] <<" ," << data[CLOSE] <<" ," <<data[HIGH] <<" ,"<<data[LOW] <<endl;
+//    #warning ändra denna sökväg till en plats där du vill spara databasen. Funktionalitet på väg!
+//    make_file("/Users/victorbirath/Desktop/stock_market_trading-master/Database", "Print");
+    
+    cout <<_Database->get_latest_close_price(stock_id) <<endl;
+    delete _Database;
 }
+
 
 

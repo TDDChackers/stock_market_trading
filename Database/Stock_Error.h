@@ -12,6 +12,7 @@
 #include <iostream>
 #include <stdexcept>
 
+
 class Stock_Error : public std::logic_error
 {
 public:
