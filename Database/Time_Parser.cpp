@@ -18,7 +18,7 @@ namespace Time_Parser
         if (0 > hour || hour >23 ||
             0 > min  || min  >59)
         {
-#warning Implementera Popup!
+            #warning Implementera Popup!
             throw std::runtime_error("Ttmestamp is impossible");
         }
         
@@ -35,11 +35,11 @@ namespace Time_Parser
         timeinfo = localtime ( &rawtime );
         int year = to_int(y);
         
-        if (year > 1900) year -=2000;
-        if (0 <= year <50) year += 100;
+        year -=1900;
+        //if (0 <= year <50) year += 100;
         
         timeinfo->tm_year = year;
-        timeinfo->tm_mon = to_int(m);
+        timeinfo->tm_mon = (to_int(m)-1);
         timeinfo->tm_mday = to_int(d);
         timeinfo->tm_hour = hour;
         timeinfo->tm_min  = min;
@@ -63,7 +63,7 @@ namespace Time_Parser
         timeinfo = gmtime(&timestamp);
         unsigned int iMonth = timeinfo->tm_mon;
         
-        if (iMonth<10) return ("0"+to_string(iMonth));
+        if (iMonth<10) return ("0"+to_string(iMonth+1));
         
         return to_string(iMonth);
     }
@@ -72,7 +72,7 @@ namespace Time_Parser
     {
         struct tm * timeinfo;
         timeinfo = gmtime(&timestamp);
-        unsigned int iDate = timeinfo->tm_mday;
+        unsigned int iDate = timeinfo->tm_mday +1;
         if (iDate<10)
         {
             return ("0"+to_string(iDate));
@@ -84,6 +84,7 @@ namespace Time_Parser
     {
         struct tm * timeinfo;
         timeinfo = gmtime(&timestamp);
+        std::cout << " timeinfo->tm_year: " << "1900"+timeinfo->tm_year << std::endl;
         return (1900+timeinfo->tm_year);
     }
     
@@ -91,14 +92,14 @@ namespace Time_Parser
     {
         struct tm * timeinfo;
         timeinfo = gmtime(&timestamp);
-        return timeinfo->tm_mon;
+        return (timeinfo->tm_mon+1);
     }
     
     int int_date(time_t timestamp)
     {
         struct tm * timeinfo;
         timeinfo = gmtime(&timestamp);
-        return timeinfo->tm_mday;
+        return timeinfo->tm_mday +1;
     }
     
     void increase_day(time_t& t)

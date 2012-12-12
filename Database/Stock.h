@@ -5,6 +5,10 @@
 //  Created by Victor Birath on 2012-11-04.
 //  Copyright (c) 2012 Victor Birath. All rights reserved.
 //
+//  Stock is a class which delivers historical data for
+//  a stock. Stock can download data  
+//
+//
 
 #ifndef __database__Stock__
 #define __database__Stock__
@@ -21,13 +25,12 @@ enum stock_data_index
     DATE = 0, // för framtida användning
     OPEN = 1,
     HIGH = 2,
-    LOW = 3,
+    LOW =  3,
     CLOSE= 4,
     VOLUME=5
 };
 
 class Stock {
-    
     
 public:
     ~Stock();
@@ -49,7 +52,7 @@ private:
     std::string     _path;
     double          _latest_close_price = -1;
     time_t          _timestamp_latest_close_price = -1;
-    time_t          _timestamp_oldest_close_price = -1;
+    time_t          _timestamp_oldest_close_price = 10000000000000000;
     
     std::map<time_t, std::vector<double> >* _history;
     

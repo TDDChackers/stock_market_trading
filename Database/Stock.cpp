@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Victor Birath. All rights reserved.
 //
 //
-//
+// Stock
 //
 //
 //
@@ -149,10 +149,18 @@ double Stock::get_latest_close_price() const
 
 void Stock::correct_timestamps(time_t& from, time_t& to)
 {
+     std::cout << " Stock::correct_timestamps" << std::endl;
     if (_timestamp_oldest_close_price < from < _timestamp_latest_close_price)
+    {
+        std::cout << " _timestamp_oldest_close_price < from < _timestamp_latest_close_price" << std::endl;
         from = _timestamp_latest_close_price;
+        
+    }
     if (_timestamp_oldest_close_price < to < _timestamp_latest_close_price)
+    {
+         std::cout << " _timestamp_oldest_close_price < to < _timestamp_latest_close_price" << std::endl;
         to = _timestamp_oldest_close_price;
+    }
 }
 
 void Stock::import_web_data(time_t from, time_t to)
@@ -172,7 +180,7 @@ void Stock::import_web_data(time_t from, time_t to)
     
     std::string http_string = make_http_str(_name,from_mday,from_mon,from_year,to_mday,to_mon,to_year);
     
-    // std::cout << "Downloading: " << http_string << std::endl;
+    std::cout << "Downloading: " << http_string << std::endl;
     
     CkHttp http;
     
@@ -210,11 +218,11 @@ std::string Stock::make_http_str(std::string ID,int _from_mady,int _from_month,i
 {
     std::cout << _from_mady <<  _from_month <<  _from_year<< _to_mady<< _to_month<< _to_year <<  std::endl;
     std::string sFrom_Day = to_string(_from_mady);
-    std::string sFrom_Month = to_string(_from_month-1);
+    std::string sFrom_Month = to_string(_from_month);
     std::string sFrom_Year = to_string(_from_year);
     
     std::string sTo_Day = to_string(_to_mady);
-    std::string sTo_Month = to_string(_to_month-1);
+    std::string sTo_Month = to_string(_to_month);
     std::string sTo_Year = to_string(_to_year);
     
     std::string str = "http://ichart.yahoo.com/table.csv?s=";

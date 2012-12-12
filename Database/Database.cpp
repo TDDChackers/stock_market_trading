@@ -10,6 +10,7 @@
 #include "Database_Error.h"
 #include "Time_Parser.h"
 #include "Stock.h"
+#include "Stock_Error.h"
 #include <map>
 #include <string>
 #include <fstream>
@@ -105,10 +106,16 @@ void Database::import_web(std::string& stock_id,time_t& from,time_t& to)
     {
         std::cout << "new Stock(stock_id)"<<stock_id << std::endl;
         _Stocks[stock_id] = new Stock(stock_id);
-        
-        
     }
-    _Stocks[stock_id]->import_web_data(from, to);
+    try
+    {
+        _Stocks[stock_id]->import_web_data(from, to);
+    }
+    catch (const Stock_Error& err)
+    {
+        throw Database_Error(err.what());
+    }
+    
 }
 
 bool Database::is_id(const string& id)
